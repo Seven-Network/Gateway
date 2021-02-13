@@ -13,6 +13,8 @@ export class User {
 
   hash: string;
 
+  success: boolean = true;
+
   @Column()
   verified: string = "0";
 

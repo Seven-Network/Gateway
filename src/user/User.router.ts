@@ -53,6 +53,13 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+userRouter.post("/logout", (_, res) => {
+  res.status(201);
+  res.json({
+    success: true,
+  });
+});
+
 userRouter.post("/create", async (req, res) => {
   try {
     const username = req.body.username;

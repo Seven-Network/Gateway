@@ -27,7 +27,7 @@ export async function createUser(username: string, password: string) {
   ) {
     const error: UserServiceError = {
       message: "Invalid username",
-      httpCode: 401,
+      httpCode: 400,
     };
     throw error;
   }
@@ -35,7 +35,7 @@ export async function createUser(username: string, password: string) {
   if (!password || !validator.isStrongPassword(password)) {
     const error: UserServiceError = {
       message: "Invalid/weak password",
-      httpCode: 401,
+      httpCode: 400,
     };
     throw error;
   }
@@ -44,7 +44,7 @@ export async function createUser(username: string, password: string) {
   if (users.length > 0) {
     const error: UserServiceError = {
       message: "User already exists",
-      httpCode: 401,
+      httpCode: 400,
     };
     throw error;
   }

@@ -2,9 +2,9 @@
   "name": "seven-network-gateway",
   "version": "0.0.1",
   "description": "Gateway server for the Seven Network",
-  "main": "dist/src/server.js",
+  "main": "./dist/server.js",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node ./dist/server.js",
     "start:dev": "nodemon",
     "build": "tsc"
   },

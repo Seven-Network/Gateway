@@ -16,4 +16,7 @@ export class User {
 
   @Column({ default: "0" })
   is_creator: string;
+
+  @Column({ default: false })
+  is_developer: boolean;
 }

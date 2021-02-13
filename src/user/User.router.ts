@@ -20,7 +20,7 @@ userRouter.post("/details", async (req, res) => {
     const hash = await createHash(user.id.toString(), user.username);
     res.json({
       success: true,
-      username: `[[color="#237FFF"]I[/color][color="#FFA323"]C[/color][color="#FF2323"]E[/color][color="#237FFF"]D[/color]] ${user?.username}`,
+      username: `[rainbow]${user?.username}[/rainbow]`,
       verified: user?.verified,
       is_creator: user?.is_creator,
       new_followers: false,

@@ -8,7 +8,7 @@ export const connectDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     synchronize: true,
-    entities: ["**/*.entity.ts"]
+    entities: ["./**/*.entity.ts"]
   });
   console.log("Connected to database");
 };

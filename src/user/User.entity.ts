@@ -13,4 +13,7 @@ export class User {
 
   @Column({ default: "0" })
   verified: string;
+
+  @Column({ default: "0" })
+  is_creator: string;
 }

@@ -31,7 +31,7 @@ export class User {
   kills: string = "0";
 
   @Column()
-  death: string = "0";
+  deaths: string = "0";
 
   @Column()
   assists: string = "0";

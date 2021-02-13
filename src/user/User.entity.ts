@@ -25,7 +25,7 @@ export class User {
   is_developer: boolean = false;
 
   @Column()
-  level: number = 0;
+  level: number = 1;
 
   @Column()
   kills: string = "0";

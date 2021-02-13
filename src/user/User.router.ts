@@ -21,6 +21,7 @@ userRouter.post("/details", async (req, res) => {
     res.json({
       success: true,
       username: user?.username,
+      verified: user?.verified,
       hash: hash
     });
   } catch (error) {

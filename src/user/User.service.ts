@@ -34,7 +34,7 @@ export async function loginUser(username: string, password: string) {
     throw error;
   }
 
-  const pwComparison = await compare(password, user.passwordHash);
+  const pwComparison = await compare(password, user.passwordHash as string);
 
   if (!pwComparison) {
     const error: UserServiceError = {

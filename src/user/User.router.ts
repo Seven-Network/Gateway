@@ -18,16 +18,14 @@ userRouter.post("/details", async (req, res) => {
   try {
     const user = await getUserByHash(req.query.hash as string);
     const hash = await createHash(user.id.toString(), user.username);
-    const suffix = user.is_developer ? ' [rainbow]DEV[/rainbow]' : "";
-    res.json({
-      success: true,
-      username: `${user?.username}${suffix}`,
-      verified: user?.verified,
-      is_creator: user?.is_creator,
-      is_developer: user?.is_developer,
-      new_followers: false,
-      hash: hash
-    });
+
+    // Modify object before sending it over the internet
+    const suffix = user.is_developer ? " [rainbow]DEV[/rainbow]" : "";
+    user.username = user.username += suffix;
+    delete user.passwordHash;
+    user.hash = hash;
+
+    res.json(user);
   } catch (error) {
     res.status(error.httpCode || 500);
     res.json({

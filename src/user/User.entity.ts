@@ -9,14 +9,70 @@ export class User {
   username: string;
 
   @Column()
-  passwordHash: string;
+  passwordHash?: string;
 
-  @Column({ default: "0" })
-  verified: string;
+  hash: string;
 
-  @Column({ default: "0" })
-  is_creator: string;
+  @Column()
+  verified: string = "0";
 
-  @Column({ default: false })
-  is_developer: boolean;
+  @Column()
+  is_creator: string = "0";
+
+  @Column()
+  is_developer: boolean = false;
+
+  @Column()
+  level: number = 0;
+
+  @Column()
+  kill: string = "0";
+
+  @Column()
+  death: string = "0";
+
+  @Column()
+  assists: string = "0";
+
+  @Column()
+  kdr: string = "0.00";
+
+  @Column()
+  headshots: string = "0";
+
+  @Column()
+  last_match_kills: string = "N/A";
+
+  @Column()
+  last_match_headshots: string = "N/A";
+
+  @Column()
+  last_match_position: string = "N/A";
+
+  @Column()
+  last_match_time: string = "N/A";
+
+  @Column()
+  total_game_time: string = "N/A";
+
+  @Column()
+  total_games_played: string = "N/A";
+
+  @Column()
+  total_games_won: string = "N/A";
+
+  @Column()
+  coins: string = "0";
+
+  @Column()
+  rank: string = "0";
+
+  @Column()
+  current_rank: string = "0";
+
+  @Column()
+  emoji: string = "Charm-None-Emoji.png";
+
+  @Column()
+  completed_quests: string = "0"
 }

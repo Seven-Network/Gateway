@@ -1,6 +1,8 @@
+import { compare, hash } from "bcrypt";
+import { sign, verify } from "jsonwebtoken";
+
 import { User } from "./User.entity";
 import { getManager } from "typeorm";
-import { hash } from "bcrypt";
 import validator from "validator";
 
 export interface UserServiceError {
@@ -8,10 +10,41 @@ export interface UserServiceError {
   httpCode: number;
 }
 
+export interface UserServicePayload {
+  id: string;
+  username: string;
+}
+
 export async function getUsers() {
   const manager = getManager();
   const users = await manager.find(User);
   return users;
+}
+
+export async function loginUser(username: string, password: string) {
+  const manager = getManager();
+
+  const user = await manager.findOne(User, { username: username });
+
+  if (!user) {
+    const error: UserServiceError = {
+      message: "Invalid credentials",
+      httpCode: 401,
+    };
+    throw error;
+  }
+
+  const pwComparison = await compare(password, user.passwordHash);
+
+  if (!pwComparison) {
+    const error: UserServiceError = {
+      message: "Invalid credentials",
+      httpCode: 401,
+    };
+    throw error;
+  }
+
+  return user;
 }
 
 export async function createUser(username: string, password: string) {
@@ -59,4 +92,53 @@ export async function createUser(username: string, password: string) {
   const savedUser = await manager.save(user);
 
   return savedUser;
+}
+
+export async function createHash(id: string, username: string) {
+  return sign(
+    {
+      id: id,
+      username: username,
+    } as UserServicePayload,
+    process.env.JWT_SECRET as string,
+    {
+      expiresIn: "31d",
+    }
+  );
+}
+
+export async function getUserByHash(hash: string) {
+  var decoded: UserServicePayload;
+
+  try {
+    decoded = verify(hash, process.env.JWT_SECRET as string) as UserServicePayload;
+  } catch (_) {
+    const error: UserServiceError = {
+      message: "Invalid hash",
+      httpCode: 401,
+    };
+    throw error;
+  }
+
+  if (!decoded.username) {
+    const error: UserServiceError = {
+      message: "Invalid hash",
+      httpCode: 401,
+    };
+    throw error;
+  }
+
+  const manager = getManager();
+
+  const user = await manager.findOne(User, { username: decoded.username });
+
+  if (!user) {
+    const error: UserServiceError = {
+      message: "Invalid hash",
+      httpCode: 401,
+    };
+    throw error;
+  }
+
+  return user;
 }

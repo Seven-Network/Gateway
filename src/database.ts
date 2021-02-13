@@ -1,3 +1,4 @@
+import { User } from "./user/User.entity";
 import { createConnection } from "typeorm";
 
 export const connectDB = async () => {
@@ -8,7 +9,7 @@ export const connectDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     synchronize: true,
-    entities: ["./**/*.entity.*"]
+    entities: [User]
   });
   console.log("Connected to database");
 };

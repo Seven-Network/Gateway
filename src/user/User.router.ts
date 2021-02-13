@@ -26,7 +26,6 @@ userRouter.post("/details", async (req, res) => {
       is_creator: user?.is_creator,
       is_developer: user?.is_developer,
       new_followers: false,
-      emoji: 'https://i.pinimg.com/originals/47/f6/66/47f666d4b08af062945eba37987ebd81.jpg',
       hash: hash
     });
   } catch (error) {

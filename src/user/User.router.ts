@@ -18,7 +18,7 @@ userRouter.post("/details", async (req, res) => {
   try {
     const user = await getUserByHash(req.query.hash as string);
     const hash = await createHash(user.id.toString(), user.username);
-    const suffix = user.is_developer ? ' [Dev]' : "";
+    const suffix = user.is_developer ? '[\\[rainbow]DEV[/rainbow]]' : "";
     res.json({
       success: true,
       username: `${user?.username}${suffix}`,

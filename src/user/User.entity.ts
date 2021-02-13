@@ -26,7 +26,7 @@ export class User {
   level: number = 0;
 
   @Column()
-  kill: string = "0";
+  kills: string = "0";
 
   @Column()
   death: string = "0";
@@ -41,25 +41,25 @@ export class User {
   headshots: string = "0";
 
   @Column()
-  last_match_kills: string = "N/A";
+  last_match_kills: string = "0";
 
   @Column()
-  last_match_headshots: string = "N/A";
+  last_match_headshots: string = "0";
 
   @Column()
-  last_match_position: string = "N/A";
+  last_match_position: string = "0";
 
   @Column()
-  last_match_time: string = "N/A";
+  last_match_time: string = "0";
 
   @Column()
-  total_game_time: string = "N/A";
+  total_game_time: string = "0";
 
   @Column()
-  total_games_played: string = "N/A";
+  total_games_played: string = "0";
 
   @Column()
-  total_games_won: string = "N/A";
+  total_games_won: string = "0";
 
   @Column()
   coins: string = "0";

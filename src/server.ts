@@ -17,7 +17,7 @@ async function bootstrapServer() {
 
   app.use(
     cors({
-      origin: [`http://localhost:${port}`, "https://venge.io/"],
+      origin: [`http://localhost:${port}`, "https://venge.io"],
     })
   );
   app.use(urlencoded({ extended: true }));

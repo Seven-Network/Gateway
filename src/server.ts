@@ -11,9 +11,15 @@ import { urlencoded } from "body-parser";
 async function bootstrapServer() {
   console.log("Bootstrapping server");
 
+  const port: Number = Number(process.env.PORT) || 3000;
+
   const app = express();
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: [`http://localhost:${port}`, "https://venge.io/"],
+    })
+  );
   app.use(urlencoded({ extended: true }));
 
   await connectDB();
@@ -21,8 +27,6 @@ async function bootstrapServer() {
   app.use("/", requestRouter);
 
   app.use("/", router);
-
-  const port: Number = Number(process.env.PORT) || 3000;
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);

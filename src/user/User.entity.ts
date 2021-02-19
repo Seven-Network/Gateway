@@ -28,7 +28,7 @@ export class User {
   level: number = 1;
 
   @Column()
-  experience: string = "0";
+  experience: string = "1";
 
   @Column()
   kills: string = "0";

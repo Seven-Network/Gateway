@@ -1,5 +1,6 @@
 import {
   createHash,
+  createUser,
   getUserByHash,
   loginUser,
 } from "./User.service";

@@ -11,10 +11,6 @@ export class User {
   @Column()
   passwordHash?: string;
 
-  hash: string;
-
-  success: boolean = true;
-
   @Column()
   verified: string = "0";
 
@@ -80,4 +76,8 @@ export class User {
 
   @Column()
   completed_quests: string = "0";
+
+  hash: string;
+
+  success: boolean = true;
 }

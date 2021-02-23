@@ -39,11 +39,16 @@
     const responseTextArea = document.getElementById("cu-response");
 
     function submitCreateUserForm() {
-      const formData = new FormData();
-      formData.append("username", usernameInput.value);
-      formData.append("password", passwordInput.value);
-
-      fetch("/user/create", { method: "POST", body: formData })
+      fetch("/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: usernameInput.value,
+          password: passwordInput.value,
+        }),
+      })
         .then(async (response) => {
           const json = await response.json();
           responseTextArea.value = JSON.stringify(json);

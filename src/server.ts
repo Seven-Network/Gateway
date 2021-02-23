@@ -3,10 +3,11 @@ import "dotenv/config";
 import * as cors from "cors";
 import * as express from "express";
 
+import { json, urlencoded } from "body-parser";
+
 import { connectDB } from "./database";
 import requestRouter from "./middleware/request-router.middleware";
 import router from "./router";
-import { urlencoded } from "body-parser";
 
 async function bootstrapServer() {
   console.log("Bootstrapping server");
@@ -22,6 +23,7 @@ async function bootstrapServer() {
     })
   );
   app.use(urlencoded({ extended: true }));
+  app.use(json());
 
   await connectDB();
 

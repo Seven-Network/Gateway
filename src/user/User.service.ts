@@ -111,7 +111,10 @@ export async function getUserByHash(hash: string) {
   var decoded: UserServicePayload;
 
   try {
-    decoded = verify(hash, process.env.JWT_SECRET as string) as UserServicePayload;
+    decoded = verify(
+      hash,
+      process.env.JWT_SECRET as string
+    ) as UserServicePayload;
   } catch (_) {
     const error: UserServiceError = {
       message: "Invalid hash",

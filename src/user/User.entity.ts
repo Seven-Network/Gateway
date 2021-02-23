@@ -79,5 +79,5 @@ export class User {
   emoji: string = "Charm-None-Emoji.png";
 
   @Column()
-  completed_quests: string = "0"
+  completed_quests: string = "0";
 }

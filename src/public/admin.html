@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seven Network Admin Panel</title>
+    <style>
+      * {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Seven Network Admin Panel</h1>
+    <hr />
+    <h2>Create User</h2>
+    <form id="create-user-form">
+      <input id="cu-username-input" type="text" placeholder="Username" />
+      <input id="cu-password-input" type="text" placeholder="Password" />
+      <button type="submit">Create</button>
+      <br />
+      <textarea
+        id="cu-response"
+        style="height: 150px; width: 300px"
+        placeholder="Server response"
+      ></textarea>
+    </form>
+    <hr />
+    <small>Yea I know, it's super scuffed</small>
+  </body>
+  <script>
+    const createUserForm = document.getElementById("create-user-form");
+
+    const usernameInput = document.getElementById("cu-username-input");
+    const passwordInput = document.getElementById("cu-password-input");
+
+    const responseTextArea = document.getElementById("cu-response");
+
+    function submitCreateUserForm() {
+      const formData = new FormData();
+      formData.append("username", usernameInput.value);
+      formData.append("password", passwordInput.value);
+
+      fetch("/user/create", { method: "POST", body: formData })
+        .then(async (response) => {
+          const json = await response.json();
+          responseTextArea.value = JSON.stringify(json);
+        })
+        .catch((error) => {
+          responseTextArea.value = error.message;
+        });
+    }
+
+    createUserForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      submitCreateUserForm();
+      return false;
+    });
+  </script>
+</html>

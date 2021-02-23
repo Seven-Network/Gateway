@@ -29,6 +29,8 @@ async function bootstrapServer() {
 
   app.use("/", router);
 
+  app.use("/", express.static("src/public"));
+
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });

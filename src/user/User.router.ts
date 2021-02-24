@@ -67,40 +67,48 @@ userRouter.post("/create", async (_, res) => {
 });
 
 userRouter.post("/update-stats/:serverLinkPass", async (req, res) => {
-  if (req.params.serverLinkPass != process.env.SERVER_LINK_PASS) {
+  try {
+    if (req.params.serverLinkPass != process.env.SERVER_LINK_PASS) {
+      res.json({
+        success: false,
+        message: "Invalid server link password",
+      });
+      return;
+    }
+
+    const user = await getUserByHash(req.body.hash as string);
+
+    var kills = parseInt(user.kills);
+    kills += req.body.obtainedKills;
+    user.kills = kills.toString();
+
+    var deaths = parseInt(user.deaths);
+    deaths += req.body.obtainedDeaths;
+    user.deaths = deaths.toString();
+
+    var headshots = parseInt(user.headshots);
+    headshots += req.body.obtainedHeadshots;
+    user.headshots = headshots.toString();
+
+    var exp = parseInt(user.experience);
+    exp += req.body.obtainedExp;
+    user.experience = exp.toString();
+
+    const kd = (parseInt(user.kills) / parseInt(user.deaths)).toFixed(2);
+    user.kdr = kd;
+
+    updateUser(user);
+
+    res.send({
+      success: true,
+    });
+  } catch (error) {
+    res.status(error.httpCode || 500);
     res.json({
       success: false,
-      message: "Invalid server link password",
+      message: error.message || "Internal server error",
     });
-    return;
   }
-
-  const user = await getUserByHash(req.body.hash as string);
-
-  var kills = parseInt(user.kills);
-  kills += req.body.obtainedKills;
-  user.kills = kills.toString();
-
-  var deaths = parseInt(user.deaths);
-  deaths += req.body.obtainedDeaths;
-  user.deaths = deaths.toString();
-
-  var headshots = parseInt(user.headshots);
-  headshots += req.body.obtainedHeadshots;
-  user.headshots = headshots.toString();
-
-  var exp = parseInt(user.experience);
-  exp += req.body.obtainedExp;
-  user.experience = exp.toString();
-
-  const kd = (parseInt(user.kills) / parseInt(user.deaths)).toFixed(2);
-  user.kdr = kd;
-
-  updateUser(user);
-
-  res.send({
-    success: true,
-  });
 });
 
 export default userRouter;

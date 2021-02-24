@@ -47,6 +47,12 @@ export async function loginUser(username: string, password: string) {
   return user;
 }
 
+export async function updateUser(user: User) {
+  const manager = getManager();
+  await manager.save(user);
+  return user;
+}
+
 export async function createUser(username: string, password: string) {
   const manager = getManager();
 

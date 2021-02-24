@@ -1,6 +1,6 @@
 {
   "name": "seven-network-gateway",
-  "version": "0.1.1",
+  "version": "0.1.11",
   "description": "Gateway server for the Seven Network",
   "main": "./dist/server.js",
   "type": "commonjs",

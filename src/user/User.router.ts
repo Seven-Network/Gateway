@@ -85,6 +85,10 @@ userRouter.post("/update-stats/:serverLinkPass", async (req, res) => {
   deaths += req.body.obtainedDeaths;
   user.deaths = deaths.toString();
 
+  var headshots = parseInt(user.headshots);
+  headshots += req.body.obtainedHeadshots;
+  user.headshots = headshots.toString();
+
   var exp = parseInt(user.experience);
   exp += req.body.obtainedExp;
   user.experience = exp.toString();

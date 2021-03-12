@@ -38,13 +38,13 @@ userRouter.post("/login", async (req, res) => {
     const user = await loginUser(username, password);
     const hash = await createHash(user.id.toString(), user.username);
     res.status(201);
-    if (user.discord_connected = "0") {
+    if (user.discord_connected == "0") {
       res.json({
         success: false,
         message: "Account is not yet validated with your Discord Account. Please contact a staff"
       });
     }
-    else if (user.discord_connected = "1") {
+    else if (user.discord_connected == "1") {
       res.json({
         success: true,
         username: user.username,
